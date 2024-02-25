@@ -17,6 +17,8 @@ const connection = async () => {
   } catch (error) {
     console.log("Error while connecting to database", error.message);
   }
+
+  
 };
 
 export default connection;
