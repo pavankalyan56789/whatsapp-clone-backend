@@ -10,3 +10,16 @@ route.get("/users/get", getUser);
 route.post("/conversation/add", addConversation);
 
 export default route;
+
+
+
+
+
+// //Messsages are stored a list of objects here: 
+// messages = {
+//     text : "Hello",
+//     type : 'text'
+//     senderID : sender sub,
+//     receiverID : receiver sub,
+//     timestamp:auto generated,
+// }
