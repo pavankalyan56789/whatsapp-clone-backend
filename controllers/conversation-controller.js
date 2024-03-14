@@ -15,9 +15,21 @@ export const addConversation = async (request, response) => {
           },
         });
 
+        console.log("Conversation exists");
+        console.log(exists);
+
         if(exists){
             response.status(200).json("Conversation already exists");
+            return;
         }
+
+        const newConversation = new Conversations(
+          {
+            members:[senderId, receiverId],
+          }
+        );
+        await newConversation.save();
+        response.status(200).json(newConversation);
     } catch (error) {
       response.status(500).json(error.message);
     }
