@@ -2,7 +2,7 @@ import Conversations from "../models/conversation.js";
 
 
 export const addConversation = async (request, response) => {
-    console.log(request.body);
+    // console.log(request.body);
 
     //request.body.data is { senderId: account.sub, receiverId: user.sub }
     try {
@@ -15,8 +15,8 @@ export const addConversation = async (request, response) => {
           },
         });
 
-        console.log("Conversation exists");
-        console.log(exists);
+        // console.log("Conversation exists");
+        // console.log(exists);
 
         if(exists){
             response.status(200).json("Conversation already exists");
@@ -35,6 +35,27 @@ export const addConversation = async (request, response) => {
     }
   };
 
+
+
+
+
+  export const getConversation = async (request, response) => {
+    console.log(request.query);
+
+    try {
+      const senderId = request.query.senderId;
+      const receiverId = request.query.receiverId;
+
+      const conversation = await Conversations.findOne({
+        members: {
+          $all: [senderId, receiverId],
+        },
+      });
+      response.status(200).json(conversation);
+    } catch (error) {
+      response.status(500).json(error.message);
+    }
+  };
 
 // Conversation :
 // {
