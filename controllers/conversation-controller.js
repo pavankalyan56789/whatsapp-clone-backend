@@ -57,6 +57,22 @@ export const addConversation = async (request, response) => {
     }
   };
 
+
+
+
+  export const addMessage = async (request, response) => {
+      console.log(request.body);
+
+      const message = request.body.message;
+      try {
+          
+          response.status(200).json(message);
+          }catch (error) {
+          response.status(500).json(error.message);
+        }
+
+  }
+
 // Conversation :
 // {
 //     messages : [],
