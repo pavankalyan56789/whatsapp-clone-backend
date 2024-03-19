@@ -62,11 +62,21 @@ export const addConversation = async (request, response) => {
 
   export const addMessage = async (request, response) => {
       console.log(request.body);
-
-      const message = request.body.message;
+      
       try {
-          
-          response.status(200).json(message);
+          await Conversations.findByIdAndUpdate(request.body.conversationId, {
+            $push: {
+              messages: {
+                text: request.body.message,
+                type: request.body.type,
+                senderId: request.body.senderId,
+                receiverId: request.body.receiverId,
+                timestamp: request.body.timestamp,
+              },
+            },
+          });
+
+          response.status(200).json("Message added");
           }catch (error) {
           response.status(500).json(error.message);
         }
